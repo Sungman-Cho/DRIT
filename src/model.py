@@ -24,7 +24,7 @@ class DRIT(nn.Module):
             self.disB = networks.Dis(opts.input_dim_b, norm=opts.dis_norm, sn=opts.dis_spectral_norm)
             self.disA2 = networks.Dis(opts.input_dim_a, norm=opts.dis_norm, sn=opts.dis_spectral_norm)
             self.disB2 = networks.Dis(opts.input_dim_b, norm=opts.dis_norm, sn=opts.dis_spectral_norm)
-            self.disContent = networks.Dis_content()
+        self.disContent = networks.Dis_content()
 
         # encoders
         self.enc_c = networks.E_content(opts.input_dim_a, opts.input_dim_b)
