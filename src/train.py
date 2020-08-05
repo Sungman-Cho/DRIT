@@ -72,7 +72,7 @@ def main():
         # Save network weights
         saver.write_model(ep, total_it, model)
 
-return
+    return
 
 if __name__ == '__main__':
     main()

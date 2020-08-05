@@ -26,7 +26,7 @@ class Dis_content(nn.Module):
         outs.append(out)
         return outs
 
-    class MultiScaleDis(nn.Module):
+class MultiScaleDis(nn.Module):
     def __init__(self, input_dim, n_scale=3, n_layer=4, norm='None', sn=False):
         super(MultiScaleDis, self).__init__()
         ch = 64
@@ -51,7 +51,7 @@ class Dis_content(nn.Module):
     def forward(self, x):
         outs = []
         for Dis in self.Diss:
-        outs.append(Dis(x))
+            outs.append(Dis(x))
         x = self.downsample(x)
         return outs
 
@@ -400,20 +400,20 @@ class G_concat(nn.Module):
         out4 = self.decB4(x_and_z4)
         return out4
 
-####################################################################
-#------------------------- Basic Functions -------------------------
-####################################################################
+    ####################################################################
+    #------------------------- Basic Functions -------------------------
+    ####################################################################
     def get_scheduler(optimizer, opts, cur_ep=-1):
-    if opts.lr_policy == 'lambda':
-        def lambda_rule(ep):
-            lr_l = 1.0 - max(0, ep - opts.n_ep_decay) / float(opts.n_ep - opts.n_ep_decay + 1)
-            return lr_l
-        scheduler = lr_scheduler.LambdaLR(optimizer, lr_lambda=lambda_rule, last_epoch=cur_ep)
-    elif opts.lr_policy == 'step':
-        scheduler = lr_scheduler.StepLR(optimizer, step_size=opts.n_ep_decay, gamma=0.1, last_epoch=cur_ep)
-    else:
-        return NotImplementedError('no such learn rate policy')
-    return scheduler
+        if opts.lr_policy == 'lambda':
+            def lambda_rule(ep):
+                lr_l = 1.0 - max(0, ep - opts.n_ep_decay) / float(opts.n_ep - opts.n_ep_decay + 1)
+                return lr_l
+            scheduler = lr_scheduler.LambdaLR(optimizer, lr_lambda=lambda_rule, last_epoch=cur_ep)
+        elif opts.lr_policy == 'step':
+            scheduler = lr_scheduler.StepLR(optimizer, step_size=opts.n_ep_decay, gamma=0.1, last_epoch=cur_ep)
+        else:
+            return NotImplementedError('no such learn rate policy')
+        return scheduler
 
     def meanpoolConv(inplanes, outplanes):
         sequence = []
@@ -674,17 +674,17 @@ class SpectralNorm(object):
             if isinstance(module, (torch.nn.ConvTranspose1d,
                                 torch.nn.ConvTranspose2d,
                                 torch.nn.ConvTranspose3d)):
-            dim = 1
+                dim = 1
             else:
-            dim = 0
-    SpectralNorm.apply(module, name, n_power_iterations, dim, eps)
-    return module
+                dim = 0
+        SpectralNorm.apply(module, name, n_power_iterations, dim, eps)
+        return module
 
     def remove_spectral_norm(module, name='weight'):
         for k, hook in module._forward_pre_hooks.items():
             if isinstance(hook, SpectralNorm) and hook.name == name:
-            hook.remove(module)
-            del module._forward_pre_hooks[k]
-            return module
+                hook.remove(module)
+                del module._forward_pre_hooks[k]
+                return module
         raise ValueError("spectral_norm of '{}' not found in {}".format(name, module))
 

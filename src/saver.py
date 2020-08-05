@@ -32,11 +32,11 @@ class Saver():
 
         # make directory
         if not os.path.exists(self.display_dir):
-        os.makedirs(self.display_dir)
+            os.makedirs(self.display_dir)
         if not os.path.exists(self.model_dir):
-        os.makedirs(self.model_dir)
+            os.makedirs(self.model_dir)
         if not os.path.exists(self.image_dir):
-        os.makedirs(self.image_dir)
+            os.makedirs(self.image_dir)
 
         # create tensorboard writer
         self.writer = SummaryWriter(logdir=self.display_dir)

@@ -42,7 +42,7 @@ class TrainOptions():
         args = vars(self.opt)
         print('\n--- load options ---')
         for name, value in sorted(args.items()):
-        print('%s: %s' % (str(name), str(value)))
+            print('%s: %s' % (str(name), str(value)))
         return self.opt
 
 class TestOptions():
@@ -75,7 +75,7 @@ class TestOptions():
         args = vars(self.opt)
         print('\n--- load options ---')
         for name, value in sorted(args.items()):
-        print('%s: %s' % (str(name), str(value)))
+            print('%s: %s' % (str(name), str(value)))
         # set irrelevant options
         self.opt.dis_scale = 3
         self.opt.dis_norm = 'None'
